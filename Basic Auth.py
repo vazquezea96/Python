@@ -1,45 +1,50 @@
+#register
+# - first name, last name, password, email
+# - generate user account
+
+
+
+#login
+# - account number and password
+
+#bank operation
+
+#Initalizing th system
 import random
 
 database = {}
 
 def init():
         
-        isValid0ptionSelected = False
-        print("Welcome to AcerBank")
+    print("Welcome to AcerBank")
 
-        while isValid0ptionSelected == False:
-            
-            haveAccount = int(input("Do you have account with us?: 1 (yes) 2 (no) \n"))
+    haveAccount = int(input("Do you have account with us?: 1 (yes) 2 (no) \n"))
+
+    if(haveAccount == 1):
+        login()
         
-            if(haveAccount == 1):
-                isValid0ptionSelected = True
-                login()
-                
-            elif(haveAccount == 2):
-                isValid0ptionSelected = True
-                print(register())
-                
-            else:
-                print("You have selected invalid option")
+    elif(haveAccount == 2):
+        print(register())
+        
+    else:
+        print("You have selected invalid option")
+        init()
 
 
 def login():
     print("****** Login ******")
 
-    isLoginSuccessful = False
+    accountNumberFromUser = int(input("What is your account number? \n"))
+    password = input("What is your password? \n"
 
-    while isLoginSuccssful == False:
-
-            accountNumberFromUser = int(input("What is your account number? \n"))
-            password = input("What is your password? \n"
-
-            for accountNumber, userDetails in database.items():
-                if(accountNumber == accountNumberFromUser):
-                    if(userDetails[3] == password)
-                        isLoginSuccessful = True
+    for accountNumber, userDetails in database.items():
+        if(accountNumber == accountNumberFromUser):
+            if(userDetails[3] == password)
+                bank0peration(userDetails)
                              
-            print('Invalid account or password')
-        bank0peration(userDetails)
+    
+     print('Invalid account or password')
+     login()
 
 
     def register():
@@ -66,7 +71,7 @@ def login():
         
         print("Welcome %s %s " % ( user[0], user[1] ))
 
-         selected0ption = int(input("What would you like to do? (1) deposit (2) withdrawal (3) Logout \n"))
+         selected0ption = int(input("What would you like to do? (1) deposit (2) withdrawal (3) Logout (4) Exit \n"))
 
             if(selected0peration == 1):
                 deposit0peration()
@@ -91,14 +96,12 @@ def login():
         print("Generating Account Number")
         return random.randrange(1111111111,9999999999)
 
-
+    def logout():
+        login()
 
     #### ACTUAL BANKING SYSTEM #####
 
-    generationAccountNumber()
     init()
-
-
 
 
 
