@@ -1,12 +1,16 @@
-#name = input("What is your name? \n") 
+name = input("What is your name? \n") 
 #allowedUsers = ['Eddie', 'Ed','Edd']
 #allowedPassword = ['passwordEddie','passwordEd','passwordEdd']
 Balance = [1000, 1500 , 2000]
 
 import random 
 
-database = {} 
-
+allowedUsers = {
+    'Eddie':'passwordEddie',
+    'Ed':'passwordEd',
+    'Edd':'passwordEdd'
+}
+    
 def init():
     print("Welcome to AcerBank!")
 
@@ -31,6 +35,7 @@ def bankOperation(user):
     print('3. Complaint')
     print('4. Logout')
 
+
     selectedOption = int(input('Please select an option:'))
 
     print(selectedOption)
@@ -40,16 +45,12 @@ def bankOperation(user):
         print('you selected %s' % selectedOption + ': Withdrawl')
         withdrawalAmt = input('How much do you want to Withdrawl? \n')
         print('Your cash is dispensing...\nPlease take your cash')
-        bankOperation()
+        bankOperation(user)
 
     elif(selectedOption == 2):
 
         print('You selected %s' % selectedOption + ': Cash Deposit')
         depositAmt = input('How much would you like to deposit? \n')
-        userBalance = allowedUsers.index(name)
-        currentBalance = (Balance[userID])
-        newBalance = str(currentBalance = depositAmt)
-        print('Your new balance is $' + newBalance)
         bankOperation()
 
     elif(selectedOption == 3):
@@ -60,7 +61,8 @@ def bankOperation(user):
 
     elif(selectedOption == 4):
 
-        login()
+        exit()
+    
 
     else:
         print('Invalid option selected. Please try again.')
@@ -75,7 +77,7 @@ def register():
 
     accountNumber = generationAccountNumber()
 
-    database[accountNumber] = [ name, User, password ]
+    allowedUsers[accountNumber] = [ name, User, password ]
 
     print("Your account has been created")
     print("Your account number is: %d" % accountNumber) 
@@ -90,15 +92,17 @@ def login():
     accountNumberFromUser = int(input("What is your account number? \n"))
     password = input("What is your password \n")
 
-    for accountNumber, userDetails in database.items():
+    for accountNumber, userDetails in allowedUsers.items():
         if(accountNumber == accountNumberFromUser):
-            if(userDetails[3] == password):
+            if(userDetails[2] == password):
+            
                 bankOperation(userDetails)
-        
-
-    print('Invalid account or password')
-    login()
     
+            else:
+                print('Invalid account or password')
+                login()
+    
+        bankOperation(userDetails) 
 
 def generationAccountNumber():
 
